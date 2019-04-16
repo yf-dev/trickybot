@@ -1,0 +1,10 @@
+version: '3'
+services:
+  trickybot:
+    build: .
+    volumes:
+      - ./.env:/trickybot/.env
+      - ./app.py:/trickybot/app.py
+      - ./Pipfile:/trickybot/Pipfile
+      - ./Pipfile.lock:/trickybot/Pipfile.lock
+    restart: unless-stopped
