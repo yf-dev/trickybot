@@ -1,4 +1,4 @@
-FROM python:3.7-jessie
+FROM python:3.7-stretch
 
 RUN pip3 install --no-cache-dir pipenv  -i http://mirror.kakao.com/pypi/simple --trusted-host mirror.kakao.com
 
