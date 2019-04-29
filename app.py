@@ -17,10 +17,17 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
-    print(f"We have logged in as {client.user}")
+    print(f"[=] We have logged in as {client.user}")
+    client_activity = discord.Activity(
+        name=TRICKY_GAME_NAME, type=discord.ActivityType.watching
+    )
+    await client.change_presence(status=discord.Status.online, activity=client_activity)
+    print(f"[=] Activity has been updated")
+
     for guild in client.guilds:
         for member in guild.members:
             await update_tricky_role(member)
+    print(f"[=] All members' roles have been updated")
 
 
 @client.event
@@ -48,25 +55,29 @@ async def on_member_update(before, after):
 async def update_tricky_role(member):
     if member == client.user:
         return
-    if member.activity is None:
-        await remove_tricky_role(member)
-        return
-    if member.activity.type != discord.ActivityType.playing:
-        await remove_tricky_role(member)
-        return
-    if member.activity.name == TRICKY_GAME_NAME:
+    if (
+        (member.activity is not None)
+        and (member.activity.type == discord.ActivityType.playing)
+        and (member.activity.name == TRICKY_GAME_NAME)
+    ):
         await add_tricky_role(member)
         return
+    await remove_tricky_role(member)
+    return
 
 
 async def remove_tricky_role(member):
     tricky_role = await get_tricky_role(member.guild.roles)
-    await member.remove_roles(tricky_role)
+    if tricky_role in member.roles:
+        print(f"[-] {member.name} is not playing Tricky Towers")
+        await member.remove_roles(tricky_role)
 
 
 async def add_tricky_role(member):
     tricky_role = await get_tricky_role(member.guild.roles)
-    await member.add_roles(tricky_role)
+    if tricky_role not in member.roles:
+        print(f"[+] {member.name} is playing Tricky Towers now")
+        await member.add_roles(tricky_role)
 
 
 async def get_tricky_role(roles):
