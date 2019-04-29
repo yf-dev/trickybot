@@ -7,7 +7,7 @@ TrickyBot - Discord bot for tiny gaming community
 
 TrickyBot is a Discord bot for very very tiny gaming community.
 
-this bot will add and remove specific role automatically for members who are playing nice game like [Tricky Towers](http://www.trickytowers.com/) within the same Discord server.
+This bot will add and remove specific role automatically for members who are playing nice game like [Tricky Towers](http://www.trickytowers.com/) within the same Discord server.
 
 TrickyBot was created for [Korean Tricky Towers Union Discord](http://bit.ly/kttu-discord), but it can be easily applied to other game communities.
 
