@@ -66,14 +66,14 @@ async def update_tricky_role(member):
 async def remove_tricky_role(member):
     tricky_role = await get_tricky_role(member.guild.roles)
     if tricky_role in member.roles:
-        print(f"[-] {member.name} is not playing Tricky Towers")
+        print(f"[-] {member.name} is not playing {TRICKY_GAME_NAME}")
         await member.remove_roles(tricky_role)
 
 
 async def add_tricky_role(member):
     tricky_role = await get_tricky_role(member.guild.roles)
     if tricky_role not in member.roles:
-        print(f"[+] {member.name} is playing Tricky Towers now")
+        print(f"[+] {member.name} is playing {TRICKY_GAME_NAME} now")
         await member.add_roles(tricky_role)
 
 
