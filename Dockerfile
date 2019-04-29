@@ -5,6 +5,7 @@ RUN pip3 install --no-cache-dir pipenv  -i http://mirror.kakao.com/pypi/simple -
 RUN mkdir -p /trickybot
 COPY ./Pipfile /trickybot/Pipfile
 WORKDIR /trickybot
+RUN pipenv lock --pre
 RUN pipenv install
 
 VOLUME /trickybot
