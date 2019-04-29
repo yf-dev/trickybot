@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# INVITE URL
-# https://discordapp.com/api/oauth2/authorize?client_id=567644412356853770&permissions=268561408&scope=bot
-
 import discord
 import os
 import sys

@@ -1,6 +1,6 @@
 FROM python:3.7-stretch
 
-RUN pip3 install --no-cache-dir pipenv  -i http://mirror.kakao.com/pypi/simple --trusted-host mirror.kakao.com
+RUN pip3 install --no-cache-dir pipenv
 
 RUN mkdir -p /trickybot
 COPY ./Pipfile /trickybot/Pipfile
