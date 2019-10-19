@@ -6,7 +6,7 @@ import os
 import sys
 
 TOKEN = os.environ.get("DISCORD_TOKEN")
-TRICKY_GAME_NAME = "Tricky Towers"
+TRICKY_GAME_NAMES = ["Tricky Towers", "trickytowers.x86"]
 TRICKY_ROLE_NAME = "Tricky Towers 플레이 중"
 
 client = discord.Client()
@@ -16,7 +16,7 @@ client = discord.Client()
 async def on_ready():
     print(f"[=] We have logged in as {client.user}")
     client_activity = discord.Activity(
-        name=TRICKY_GAME_NAME, type=discord.ActivityType.watching
+        name=TRICKY_GAME_NAMES[0], type=discord.ActivityType.watching
     )
     await client.change_presence(status=discord.Status.online, activity=client_activity)
     print(f"[=] Activity has been updated")
@@ -55,7 +55,7 @@ async def update_tricky_role(member):
     if (
         (member.activity is not None)
         and (member.activity.type == discord.ActivityType.playing)
-        and (member.activity.name == TRICKY_GAME_NAME)
+        and (member.activity.name in TRICKY_GAME_NAMES)
     ):
         await add_tricky_role(member)
         return
@@ -66,14 +66,14 @@ async def update_tricky_role(member):
 async def remove_tricky_role(member):
     tricky_role = await get_tricky_role(member.guild.roles)
     if tricky_role in member.roles:
-        print(f"[-] {member.name} is not playing {TRICKY_GAME_NAME}")
+        print(f"[-] {member.name} is not playing {TRICKY_GAME_NAMES[0]}")
         await member.remove_roles(tricky_role)
 
 
 async def add_tricky_role(member):
     tricky_role = await get_tricky_role(member.guild.roles)
     if tricky_role not in member.roles:
-        print(f"[+] {member.name} is playing {TRICKY_GAME_NAME} now")
+        print(f"[+] {member.name} is playing {TRICKY_GAME_NAMES[0]} now")
         await member.add_roles(tricky_role)
 
 
@@ -89,6 +89,10 @@ async def get_tricky_role(roles):
 if __name__ == "__main__":
     if TOKEN is None:
         print("token is not defined")
+        sys.exit(-1)
+
+    if len(TRICKY_GAME_NAMES) < 1:
+        print("You should set more than one item for TRICKY_GAME_NAMES")
         sys.exit(-1)
 
     client.run(TOKEN)

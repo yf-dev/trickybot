@@ -42,7 +42,7 @@ $ pipenv run app
 
 ## 2. Change game and role name
 
-You can change game and role name by changing constant `TRICKY_GAME_NAME` and `TRICKY_ROLE_NAME` on `app.py` file.
+You can change game and role name by changing constant `TRICKY_GAME_NAMES` and `TRICKY_ROLE_NAME` on `app.py` file.
 
 
 ## 3. License
