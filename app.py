@@ -9,7 +9,12 @@ TOKEN = os.environ.get("DISCORD_TOKEN")
 TRICKY_GAME_NAMES = ["Tricky Towers", "trickytowers.x86"]
 TRICKY_ROLE_NAME = "Tricky Towers 플레이 중"
 
-client = discord.Client()
+intents = discord.Intents.none()
+intents.guilds = True
+intents.members = True
+intents.presences = True
+
+client = discord.Client(intents=intents)
 
 
 @client.event
